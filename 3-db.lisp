@@ -65,3 +65,5 @@
 (defun select (selector-fn)
   
   (remove-if-not selector-fn *db*))
+
+(defun foo_var_args (&key a (b 20) (c 30 c-p)) (list a b c c-p))
