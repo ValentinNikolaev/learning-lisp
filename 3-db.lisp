@@ -9,5 +9,10 @@
 (defun get-simple-plist(el)
   (getf (simple-plist) el))
 
-(defun make-track (title artist rating ripped)
+(defun make-album (title artist rating ripped)
   (list :title title :artist artist :rating rating :ripped ripped))
+
+(defvar *db* nil)
+
+(defun add-track(album)
+  (push album *db*))
