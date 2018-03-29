@@ -7,4 +7,5 @@
 (defun simple-plist()
   (list :a 1 :b 2 :third-34 34))
 
-
+(defun get-simple-plist(el)
+  (getf (simple-plist) el))
