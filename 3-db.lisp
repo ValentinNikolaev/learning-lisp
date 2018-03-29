@@ -9,6 +9,7 @@
 (defun get-simple-plist(el)
   (getf (simple-plist) el))
 
+
 (defun make-album (title artist rating ripped)
   (list :title title :artist artist :rating rating :ripped ripped))
 
@@ -16,3 +17,7 @@
 
 (defun add-track(album)
   (push album *db*))
+
+(defun dump-db ()
+  (dolist (track *db*)
+    (format t "~{~a:~10t~a~%~}~%" track)))
