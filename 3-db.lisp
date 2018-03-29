@@ -57,3 +57,11 @@
   (remove-if-not #'
    (lambda (track) (equal (getf track :artist) artist)) *db*)
   )
+
+
+(defun artist-selector (artist)
+  #'(lambda(track) (equal (getf track :artist) artist)))
+
+(defun select (selector-fn)
+  
+  (remove-if-not selector-fn *db*))
