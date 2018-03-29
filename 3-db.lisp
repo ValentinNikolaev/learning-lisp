@@ -21,3 +21,6 @@
 (defun dump-db ()
   (dolist (track *db*)
     (format t "~{~a:~10t~a~%~}~%" track)))
+
+(defun dump-db-oneline ()
+  (format t "~{~{~a:~10t~a~%~}~%~}" *db*))
