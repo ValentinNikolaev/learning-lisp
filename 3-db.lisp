@@ -36,3 +36,7 @@
    (prompt-read "Artist")
    (or (parse-integer (prompt-read "Rating") :junk-allowed t) 0)
    (y-or-n-p "Ripped [y/n]: ")))
+
+(defun add-tracks()
+  (loop (add-track (prompt-for-track))
+	(if (not (y-or-n-p "Another one [y/n]: /")) (return))))
