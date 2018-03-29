@@ -40,3 +40,10 @@
 (defun add-tracks()
   (loop (add-track (prompt-for-track))
 	(if (not (y-or-n-p "Another one [y/n]: /")) (return))))
+
+(defun save-db (filename)
+  (with-open-file (out filename
+                   :direction :output
+                   :if-exists :supersede)
+    (with-standard-io-syntax
+      (print *db* out))))
