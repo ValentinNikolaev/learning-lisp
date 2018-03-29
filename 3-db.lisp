@@ -53,3 +53,7 @@
     (with-standard-io-syntax
       (setf *db* (read in)))))
 
+(defun select-by-artist(artist)
+  (remove-if-not #'
+   (lambda (track) (equal (getf track :artist) artist)) *db*)
+  )
