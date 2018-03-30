@@ -89,3 +89,6 @@
 	       (if ripped-p (setf (getf row :ripped) ripped)))
 	     row)
 	 *db* )))
+
+(defun delete-rows (selector-fn)
+  (setf *db* (remove-if selector-fn *db*)))
