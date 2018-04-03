@@ -10,7 +10,7 @@
   (getf (simple-plist) el))
 
 
-(defun make-album (title artist rating ripped)
+(defun make-track (title artist rating ripped)
   (list :title title :artist artist :rating rating :ripped ripped))
 
 (defvar *db* nil)
@@ -69,7 +69,7 @@
 (defun foo_var_args
     (&key a (b 20) (c 30 c-p)) (list a b c c-p))
 
-(defun where (&key title artist rating (ripped nil ripped-p))
+(defun where-old (&key title artist rating (ripped nil ripped-p))
   #'(lambda (cd)
     (and
       (if title    (equal (getf cd :title)  title)  t)
@@ -92,3 +92,19 @@
 
 (defun delete-rows (selector-fn)
   (setf *db* (remove-if selector-fn *db*)))
+
+(defmacro backwards (expr)
+  (reverse expr))
+
+(defun make-comparison-expr-old (field value)
+  (list 'equal (list 'getf 'cd field) value))
+
+(defun make-comparison-expr (field value)
+  `(equal (getf cd ,field) ,value))
+
+(defun make-comparisons-list (fields)
+  (loop while fields
+	collecting (make-comparison-expr (pop fields) (pop fields))))
+
+(defmacro where (&rest clauses)
+  `#'(lambda (cd) (and ,@(make-comparisons-list clauses))))
